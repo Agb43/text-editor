@@ -211,7 +211,7 @@ while $overall; do
           while $batch; do
             echo "you have entered batch mode, please choose from a list of operations, for example for the batch redacter function, simply type batch redacter. Toggle will allow you to switch between modes"
             
-            echo "1) batch redacter 2) toggle 3) MD5 checksum generator 4) MD5 file integrity checker 5) batch encrypt 6) uploader via scp 7) archiver"
+            echo "1) batch redacter 2) toggle 3) sha256 checksum generator 4) batch encrypt 5) uploader via scp 6) archiver"
             read -r btinput
 
               if [[ "$btinput" == "toggle" ]]; then
@@ -289,7 +289,7 @@ while $overall; do
                   done
               fi
 
-##################################### MD5 checksum gen #######################################
+##################################### SHA-256 checksum gen #######################################
 
               if [[ "$btinput" == "MD5 checksum generator" ]]; then
                 CHECKSUMM=true
@@ -298,12 +298,12 @@ while $overall; do
                     read -r checksumm1
                       if [[ -z "$checksumm1" ]]; then
                         for CHECKSUMMEDFILE2 in "${FILESTOEDIT[@]}"; do
-                          md5sum "$CHECKSUMMEDFILE2"
+                          sha256sum "$CHECKSUMMEDFILE2"
                         done
                       else
                         for CHECKSUMMEDFILE in "${FILESTOEDIT[@]}"; do
                         touch "$checksumm1"
-                        md5sum "$CHECKSUMMEDFILE" >> "$checksumm1"
+                        sha256sum "$CHECKSUMMEDFILE" >> "$checksumm1"
                         done
                       fi
                         echo "checksums generated"
@@ -312,25 +312,7 @@ while $overall; do
               fi
 
 
-   ################################### MD5 file integrity checker ########################################        
-           
-              if [[ "$btinput" == "MD5 file integrity checker" ]]; then
-                echo "please provide the file path to the file of checksums"
-                read -r checksumchecker
-                touch temp.txt
-                checksumcheck2=$(cat "$checksumchecker" | sed -e "s|/*||g")
-                  for checksumcheck in "${FILESTOEDIT[@]}"; do
-                    md5sum "$checksumcheck" >> temp.txt
-                  done
-                    checksumcheckk1=$(cat temp.txt | sed -e "s|/*||g")
-                    if [[ "$checksumcheckk1" != "$checksumcheck2" ]]; then
-                      echo "one or more of these files have been tampered with, please review the source"
-                      rm temp.txt
-                    else
-                      echo "These files have not been altered" 
-                      rm temp.txt
-                    fi
-              fi
+   
 
   #################################### BATCH ENCRYPTION #######################
 
