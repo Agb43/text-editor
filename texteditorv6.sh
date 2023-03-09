@@ -211,7 +211,7 @@ while $overall; do
           while $batch; do
             echo "you have entered batch mode, please choose from a list of operations, for example for the batch redacter function, simply type batch redacter. Toggle will allow you to switch between modes"
             
-            echo "1) batch redacter 2) toggle 3) sha256 checksum generator 4) batch encrypt 5) uploader via scp 6) archiver"
+            echo "1) batch redacter 2) toggle 3) sha256 checksum generator 4) batch encrypt 5) uploader via scp 6) archiver 
             read -r btinput
 
               if [[ "$btinput" == "toggle" ]]; then
@@ -410,7 +410,7 @@ while $overall; do
                   done              
               fi    
 
-  
+                    
  
  
           done
